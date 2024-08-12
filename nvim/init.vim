@@ -15,9 +15,6 @@ Plug 'RRethy/nvim-base16'
 Plug 'cormacrelf/dark-notify'
 Plug 'neovim/nvim-lspconfig'
 
-Plug 'github/copilot.vim'
-
-
 Plug 'tpope/vim-abolish'
 
 Plug 'onsails/lspkind.nvim'
@@ -54,6 +51,7 @@ Plug 'dstein64/vim-startuptime'
 
 Plug 'aznhe21/actions-preview.nvim'
 
+Plug 'zbirenbaum/copilot.lua'
 Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'canary' }
 
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -95,9 +93,9 @@ nnoremap <Leader>sv    <CMD>source $MYVIMRC<CR>
 nnoremap <C-P>         <CMD>Telescope commander<CR>
 vnoremap <C-P>         <CMD>Telescope commander<CR>
 
-imap <silent><script><expr> <C-Space> copilot#Accept("")
-let g:copilot_no_tab_map = v:true
-let g:copilot_workspace_folders = ['~/repos/']
+" imap <silent><script><expr> <C-Space> copilot#Accept("")
+" let g:copilot_no_tab_map = v:true
+" let g:copilot_workspace_folders = ['~/repos/']
 
 " SymbolsOutlineOpen
 " NvimTreeOpen

@@ -14,6 +14,19 @@ require("nvim-tree").setup({
 	view = { width = 50 },
 })
 
+require('copilot').setup({
+	panel = {
+		auto_refresh = true,
+	},
+	suggestion = {
+		auto_trigger = false,
+		hide_during_completion = false,
+		keymap = {
+			accept = '<M-Space>',
+		},
+	},
+})
+
 
 require('dark_notify').run({
 	schemes = {
@@ -153,18 +166,36 @@ cmp.setup.cmdline(':', {
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-lsp.pyright.setup({
-	capabilities = capabilities,
+lsp.basedpyright.setup{
 	settings = {
-		python = {
+		python  = {
 			venvPath = "/Users/ldaniluk/.pyenv/versions/",
 			venv = vim.fn.fnamemodify(vim.fn.getcwd(), ":t"),
+		},
+		basedpyright = {
+			analysis = {
+				autoSearchPaths = true,
+				useLibraryCodeForTypes = true,
+				autoImportCompletions = true,
+				diagnosticMode = "workspace",
+				typeCheckingMode = "strict",
+			},
 		}
-	},
-	-- cmd = {
-	-- 	"pyright-langserver", "--stdio", "--venvPath=/Users/ldaniluk/.pyenv/versions/", "--venv=" .. vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
-	-- }
-})
+	}
+}
+
+-- lsp.pyright.setup({
+-- 	capabilities = capabilities,
+-- 	settings = {
+-- 		python = {
+-- 			venvPath = "/Users/ldaniluk/.pyenv/versions/",
+-- 			venv = vim.fn.fnamemodify(vim.fn.getcwd(), ":t"),
+-- 		}
+-- 	},
+-- 	-- cmd = {
+-- 	-- 	"pyright-langserver", "--stdio", "--venvPath=/Users/ldaniluk/.pyenv/versions/", "--venv=" .. vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+-- 	-- }
+-- })
 
 lsp.terraformls.setup({})
 
@@ -288,3 +319,5 @@ require("actions-preview").setup {
     },
   },
 }
+
+-- require("CopilotChat").setup{}
