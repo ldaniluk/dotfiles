@@ -19,7 +19,7 @@ require('copilot').setup({
 		auto_refresh = true,
 	},
 	suggestion = {
-		auto_trigger = false,
+		auto_trigger = true,
 		hide_during_completion = false,
 		keymap = {
 			accept = '<M-Space>',
@@ -306,7 +306,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 require("actions-preview").setup {
   telescope = {
-    sorting_strategy = "ascending",
+    sorting_strategy = "descending",
     layout_strategy = "vertical",
     layout_config = {
       width = 0.8,
