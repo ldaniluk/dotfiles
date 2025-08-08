@@ -2,6 +2,8 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+
+
 require('nvim-treesitter.configs').setup({
 	highlight = {
 		enable = true,
@@ -25,13 +27,17 @@ require('copilot').setup({
 			accept = '<M-Space>',
 		},
 	},
+	filetypes = {
+		yaml = true,
+		gitcommit = true,
+	},
 })
 
 
 require('dark_notify').run({
 	schemes = {
 		dark = 'base16-tomorrow-night-eighties',
-		light = 'base16-atelier-heath-light',
+		light = 'base16-equilibrium-light',
 	}
 })
 
@@ -168,10 +174,10 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 lsp.basedpyright.setup{
 	settings = {
-		python  = {
-			venvPath = "/Users/ldaniluk/.pyenv/versions/",
-			venv = vim.fn.fnamemodify(vim.fn.getcwd(), ":t"),
-		},
+		-- python  = {
+		-- 	venvPath = "/Users/ldaniluk/.pyenv/versions/",
+		-- 	venv = vim.fn.fnamemodify(vim.fn.getcwd(), ":t"),
+		-- },
 		basedpyright = {
 			analysis = {
 				autoSearchPaths = true,
@@ -217,6 +223,7 @@ lsp.rust_analyzer.setup({
                 buildScripts = {
                     enable = true,
                 },
+		features = 'all',
             },
 	    inlay_hint = { enable = true, },
             procMacro = {
@@ -235,7 +242,7 @@ vim.lsp.handlers.signature_help, {
 
 
 require("nvim-dap-virtual-text").setup()
-require('dap-python').setup()
+require('dap-python').setup("python")
 -- require('symbols-outline').setup()
 require("aerial").setup({
   open_automatic = false,
@@ -291,6 +298,10 @@ command_center.add({{
    desc = "coerce to upper",
    cmd = 'cru',
 }})
+command_center.add({{
+   desc = "rename symbol under cursor",
+   cmd = '<CMD>lua vim.lsp.buf.rename()<CR>',
+}})
 
 
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -304,20 +315,58 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
 })
 
-require("actions-preview").setup {
-  telescope = {
-    sorting_strategy = "descending",
-    layout_strategy = "vertical",
-    layout_config = {
-      width = 0.8,
-      height = 0.9,
-      prompt_position = "top",
-      preview_cutoff = 20,
-      preview_height = function(_, _, max_lines)
-        return max_lines - 15
-      end,
-    },
-  },
-}
+-- require("actions-preview").setup {
+--   telescope = {
+--     sorting_strategy = "descending",
+--     layout_strategy = "vertical",
+--     layout_config = {
+--       width = 0.5,
+--       height = 0.5,
+--       prompt_position = "top",
+--       preview_cutoff = 20,
+--       preview_height = function(_, _, max_lines)
+--         return 15
+--       end,
+--     },
+--   },
+-- }
 
--- require("CopilotChat").setup{}
+-- require('telescope').setup{
+--   defaults = {
+--     -- Default configuration for telescope goes here:
+--     -- config_key = value,
+--     mappings = {
+--       i = {
+--         -- map actions.which_key to <C-h> (default: <C-/>)
+--         -- actions.which_key shows the mappings for your picker,
+--         -- e.g. git_{create, delete, ...}_branch for the git_branches picker
+--         ["<C-h>"] = "which_key"
+--       }
+--     }
+--   }
+-- }
+
+require("actions-preview").setup {
+  telescope = vim.tbl_extend(
+    "force",
+    require("telescope.themes").get_cursor(),
+    {
+	    make_value = nil,
+	    make_make_display = nil,
+	    -- layout_strategy = "vertical",
+	    previewer = true,
+	    layout_config = {
+		height = 20,
+		width = 80,
+	    }
+    }
+  ),
+}
+require("CopilotChat").setup{}
+
+require("dapui").setup()
+
+require("lsp-file-operations").setup()
+
+require("bookmarks").setup({})
+vim.keymap.set({ "n", "v" }, "ma", "<cmd>BookmarksCommands<cr>", { desc = "Find and trigger a bookmark command." })

@@ -34,6 +34,8 @@ Plug 'akinsho/bufferline.nvim', { 'tag': 'v4.*' }
 Plug 'mfussenegger/nvim-dap'
 Plug 'theHamsta/nvim-dap-virtual-text'
 Plug 'mfussenegger/nvim-dap-python'
+Plug 'nvim-neotest/nvim-nio'
+Plug 'rcarriga/nvim-dap-ui'
 
 " Plug 'simrat39/symbols-outline.nvim'
 Plug 'stevearc/aerial.nvim'
@@ -52,13 +54,18 @@ Plug 'dstein64/vim-startuptime'
 Plug 'aznhe21/actions-preview.nvim'
 
 Plug 'zbirenbaum/copilot.lua'
-Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'canary' }
+Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'main' }
+
+Plug 'antosha417/nvim-lsp-file-operations'
+
+Plug 'kkharji/sqlite.lua'
+Plug 'LintaoAmons/bookmarks.nvim', { 'tag': 'v2.0.0' }
 
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
 
-let g:vimspector_base_dir='/Users/ldaniluk/.local/share/nvim/plugged/vimspector'
+" let g:vimspector_base_dir='/Users/ldaniluk/.local/share/nvim/plugged/vimspector'
 
 set cul
 "set cuc
@@ -87,6 +94,9 @@ nnoremap <Leader><Tab> <CMD>Telescope buffers<CR>
 nnoremap <Leader>-     <CMD>Telescope diagnostics<CR>
 nnoremap <Leader>e     <CMD>lua vim.diagnostic.open_float(0, {scope="line"})<CR>
 nnoremap <Leader><CR>  <CMD>lua require("actions-preview").code_actions()<CR>
+
+nnoremap ((            <CMD>cp<CR>
+nnoremap ))            <CMD>cn<CR>
 
 nnoremap <Leader>sv    <CMD>source $MYVIMRC<CR>
 
