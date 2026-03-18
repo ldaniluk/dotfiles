@@ -1,0 +1,29 @@
+[
+  {
+    "context": "VimControl && !menu",
+    "bindings": {
+      "space f": "file_finder::Toggle",
+      "space /": "workspace::NewSearch",
+      "space tab": "tab_switcher::Toggle",
+      "space -": "diagnostics::Deploy",
+      "space t": "workspace::ToggleLeftDock",
+      "space ]": "editor::FindAllReferences",
+      "space e": "editor::Hover",
+      "space enter": "editor::ToggleCodeActions",
+      "space b": "editor::Format",
+      
+      // Added: Equivalent to gitlinker.nvim
+      "space p": "editor::CopyPermalinkToLine",
+      
+      "( (": "editor::GoToPrevDiagnostic",
+      ") )": "editor::GoToDiagnostic",
+      "ctrl-p": "command_palette::Toggle"
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-p": "command_palette::Toggle"
+    }
+  }
+]

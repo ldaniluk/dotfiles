@@ -1,0 +1,45 @@
+{
+  // Enable Vim mode to replicate your Neovim environment
+  "vim_mode": true,
+
+  // Theme: You used a base16 tomorrow night theme. "One Dark" is a great built-in equivalent,
+  // but you can install the "Base16" theme extension in Zed if you prefer the exact match.
+  "theme": "One Dark",
+
+  "ui_font_size": 14,
+  "buffer_font_size": 14,
+  
+  // You had black mapped to a shortcut, but Zed handles formatting beautifully on save
+  "format_on_save": "on",
+
+  // Replicating your Rust inlay hints
+  "inlay_hints": {
+    "enabled": true
+  },
+
+  // Copilot is built-in to Zed (you had copilot.lua + CopilotChat)
+  "features": {
+    "copilot": true
+  },
+
+  // LSP Configurations mirrored from your nvim/lua/init_vim.lua
+  "lsp": {
+    "rust-analyzer": {
+      "initialization_options": {
+        "cargo": {
+          "features": "all"
+        }
+      }
+    },
+    "basedpyright": {
+      "settings": {
+        "basedpyright": {
+          "analysis": {
+            "typeCheckingMode": "strict",
+            "diagnosticMode": "workspace"
+          }
+        }
+      }
+    }
+  }
+}
