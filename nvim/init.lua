@@ -24,27 +24,27 @@ map('n', '<Leader>sv', '<CMD>source $MYVIMRC<CR>', opts)
 
 -- Simple native package manager
 local function ensure_plugin(repo, branch_or_tag)
-  local name = repo:match(".*/(.*)")
-  local path = vim.fn.stdpath("data") .. "/site/pack/vendor/start/" .. name
-  
-  if vim.fn.isdirectory(path) == 0 then
-    print("Installing " .. name .. "...")
-    local cmd = { "git", "clone", "--depth=1" }
-    if branch_or_tag then
-      table.insert(cmd, "-b")
-      table.insert(cmd, branch_or_tag)
-    end
-    table.insert(cmd, "https://github.com/" .. repo)
-    table.insert(cmd, path)
-    vim.fn.system(cmd)
-  end
-  vim.opt.rtp:prepend(path)
+	local name = repo:match(".*/(.*)")
+	local path = vim.fn.stdpath("data") .. "/site/pack/vendor/start/" .. name
+
+	if vim.fn.isdirectory(path) == 0 then
+		print("Installing " .. name .. "...")
+		local cmd = { "git", "clone", "--depth=1" }
+		if branch_or_tag then
+			table.insert(cmd, "-b")
+			table.insert(cmd, branch_or_tag)
+		end
+		table.insert(cmd, "https://github.com/" .. repo)
+		table.insert(cmd, path)
+		vim.fn.system(cmd)
+	end
+	vim.opt.rtp:prepend(path)
 end
 
 -- 1. Ensure all plugins exist
 ensure_plugin("nvim-lua/plenary.nvim")
 ensure_plugin("nvim-tree/nvim-web-devicons")
-ensure_plugin("nvim-telescope/telescope.nvim", "0.1.x")
+ensure_plugin("nvim-telescope/telescope.nvim")
 ensure_plugin("nvim-tree/nvim-tree.lua")
 ensure_plugin("neovim/nvim-lspconfig")
 ensure_plugin("stevearc/conform.nvim")
