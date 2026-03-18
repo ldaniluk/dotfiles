@@ -12,15 +12,15 @@ vim.opt.spelllang = "en_us"
 -- Core Keymaps
 vim.g.mapleader = "\\"
 vim.g.maplocalleader = "\\"
-vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-vim.keymap.set('n', '<Space>', '\\', { remap = true })
+vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
+vim.keymap.set("n", "<Space>", "\\", { remap = true })
 
 local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
-map('n', '<Leader>h', '<CMD>noh<CR>', opts)
-map('n', '((', '<CMD>cp<CR>', opts)
-map('n', '))', '<CMD>cn<CR>', opts)
-map('n', '<Leader>sv', '<CMD>source $MYVIMRC<CR>', opts)
+map("n", "<Leader>h", "<CMD>noh<CR>", opts)
+map("n", "((", "<CMD>cp<CR>", opts)
+map("n", "))", "<CMD>cn<CR>", opts)
+map("n", "<Leader>sv", "<CMD>source $MYVIMRC<CR>", opts)
 
 -- Simple native package manager
 local function ensure_plugin(repo, branch_or_tag)
@@ -89,7 +89,7 @@ ensure_plugin("nvim-treesitter/nvim-treesitter")
 vim.cmd("packloadall!")
 
 -- 3. Load configurations from the plugins folder explicitly
-local config_dir = vim.fn.stdpath('config')
+local config_dir = vim.fn.stdpath("config")
 dofile(config_dir .. "/plugins/theme.lua")
 dofile(config_dir .. "/plugins/treesitter.lua")
 dofile(config_dir .. "/plugins/telescope.lua")
