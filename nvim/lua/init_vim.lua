@@ -205,6 +205,29 @@ lsp.basedpyright.setup{
 
 lsp.terraformls.setup({})
 
+lsp.ts_ls.setup({
+	capabilities = capabilities,
+})
+
+require("conform").setup({
+  formatters_by_ft = {
+    lua = { "stylua" },
+    python = { "isort", "black" },
+    rust = { "rustfmt" },
+    javascript = { "prettier" },
+    typescript = { "prettier" },
+    javascriptreact = { "prettier" },
+    typescriptreact = { "prettier" },
+    json = { "prettier" },
+    yaml = { "prettier" },
+    markdown = { "prettier" },
+  },
+  format_on_save = {
+    timeout_ms = 1000,
+    lsp_format = "fallback",
+  },
+})
+
 lsp.rust_analyzer.setup({
     on_attach=on_attach,
     settings = {
@@ -243,6 +266,28 @@ vim.lsp.handlers.signature_help, {
 
 require("nvim-dap-virtual-text").setup()
 require('dap-python').setup("python")
+
+local dap = require('dap')
+dap.adapters.codelldb = {
+  type = 'server',
+  port = "${port}",
+  executable = {
+    command = 'codelldb', -- Ensure codelldb is installed and in your PATH
+    args = {"--port", "${port}"},
+  }
+}
+dap.configurations.rust = {
+  {
+    name = "Rust debug",
+    type = "codelldb",
+    request = "launch",
+    program = function()
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/target/debug/', 'file')
+    end,
+    cwd = '${workspaceFolder}',
+    stopOnEntry = false,
+  },
+}
 -- require('symbols-outline').setup()
 require("aerial").setup({
   open_automatic = false,
@@ -290,8 +335,8 @@ command_center.add({{
    keys = {"n", "<Leader>p"}
 }})
 command_center.add({{
-   desc = "black",
-   cmd = '<CMD>!black %<CR>',
+   desc = "Format file",
+   cmd = '<CMD>lua require("conform").format({ lsp_format = "fallback" })<CR>',
    keys = {"n", "<Leader>b"}
 }})
 command_center.add({{
@@ -370,3 +415,22 @@ require("lsp-file-operations").setup()
 
 require("bookmarks").setup({})
 vim.keymap.set({ "n", "v" }, "ma", "<cmd>BookmarksCommands<cr>", { desc = "Find and trigger a bookmark command." })
+
+-- Jujutsu (jj) integrations
+local status_lazyjj, lazyjj = pcall(require, "lazyjj")
+if status_lazyjj then
+    -- Provides the :LazyJJ command
+    lazyjj.setup()
+    vim.keymap.set("n", "<Leader>jj", "<cmd>LazyJJ<cr>", { desc = "Open LazyJJ" })
+end
+
+local status_hunk, hunk = pcall(require, "hunk")
+if status_hunk then
+    hunk.setup()
+end
+
+-- jujutsu.nvim provides commands and integration
+local status_jujutsu, jujutsu = pcall(require, "jujutsu")
+if status_jujutsu then
+    jujutsu.setup()
+end

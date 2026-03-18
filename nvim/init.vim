@@ -31,6 +31,8 @@ Plug 'hrsh7th/nvim-cmp'
 
 Plug 'akinsho/bufferline.nvim', { 'tag': 'v4.*' }
 
+Plug 'stevearc/conform.nvim'
+
 Plug 'mfussenegger/nvim-dap'
 Plug 'theHamsta/nvim-dap-virtual-text'
 Plug 'mfussenegger/nvim-dap-python'
@@ -42,6 +44,11 @@ Plug 'stevearc/aerial.nvim'
 
 Plug 'ruifm/gitlinker.nvim'
 Plug 'FeiyouG/commander.nvim'
+
+" Jujutsu (jj) support
+Plug 'yannvanhalewyn/jujutsu.nvim'
+Plug 'swaits/lazyjj.nvim'
+Plug 'julienvincent/hunk.nvim'
 
 
 " Plug 'puremourning/vimspector'
